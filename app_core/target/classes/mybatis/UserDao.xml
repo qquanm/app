@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+
+	<resultMap type="com.qu.User" id="userMap">
+		<id property="username" column="username"></id>
+		<id property="password" column="password"></id>
+		<id property="email" column="email"></id>
+		<id property="department" column="department"></id>
+		<id property="name" column="name"></id>
+		<id property="pwd_keep_time" column="pwd_keep_time"></id>
+		<id property="img" column="img" />
+		<id property="telphone" column="telphone" />
+		<id property="login_count" column="login_count" />
+		<id property="note" column="note" />
+		<id property="gender" column="note" />
+	</resultMap>
+
+	<select id="isUserExist" parameterType="com.qu.User"
+		resultType="int">
+		select count(*) from TB_MS_FLIGHT_USERS
+		where
+		username=#{username} and
+		password=#{password}
+	</select>
+
+	<!-- 根据用户的帐号来获取用户 -->
+	<select id="getUserByName" parameterType="String" resultMap="userMap">
+		select * from TB_MS_FLIGHT_USERS where username = #{username}
+	</select>
+
+	<select id="queryUsers" parameterType="String" resultMap="userMap">
+		SELECT * FROM TB_MS_FLIGHT_USERS
+	</select>
+    
+    
+     <select id="selectTotalCount" parameterType="Map" resultType="Integer">
+     	  select count(0) from TB_MS_FLIGHT_USERS
+      <trim prefix="WHERE" prefixOverrides="AND">
+      
+      	<if test="username != null">
+           AND username = #{username,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+           AND email = #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+           AND name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="department != null">
+           AND department = #{department,jdbcType=DECIMAL}
+        </if>
+      </trim>
+     </select>
+     <select id="selectEntityListByCond" parameterType="Map" resultMap="userMap">
+      select * from TB_MS_FLIGHT_USERS
+      <trim prefix="WHERE" prefixOverrides="AND">
+      
+      	<if test="username != null">
+           AND username = #{username,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+           AND email = #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="name != null">
+           AND name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="department != null">
+           AND department = #{department,jdbcType=DECIMAL}
+        </if>
+      </trim>
+  </select>
+    
+    
+    <insert id="insertEntity" parameterType="com.qu.User">
+    	INSERT INTO
+		TB_MS_FLIGHT_USERS
+	    (USERNAME, PASSWORD, LAST_TIME, LOGIN_COUNT,EMAIL,PWD_KEEP_TIME, NAME,DEPARTMENT,LAST_CHGPWD_TIME,TELPHONE)
+		VALUES
+		(
+			#{username}, 
+			#{password},
+			#{last_time}, 
+			#{login_count}, 
+			#{email},
+			#{pwd_keep_time},
+			#{name},
+			#{department},
+			sysdate,
+			#{telphone}
+		)
+    </insert>
+	<insert id="insertUser" parameterType="com.qu.User">
+		INSERT INTO
+		TB_MS_FLIGHT_USERS
+	    (USERNAME, PASSWORD, LAST_TIME, LOGIN_COUNT,EMAIL,PWD_KEEP_TIME, NAME,DEPARTMENT,LAST_CHGPWD_TIME)
+		VALUES
+		(
+			#{username}, 
+			#{password},
+			#{last_time}, 
+			#{login_count}, 
+			#{email},
+			#{pwd_keep_time},
+			#{name},
+			#{department},
+			sysdate
+		)
+	</insert>
+
+	<update id="updateUserLoginInfo" parameterType="com.qu.User">
+		update
+		TB_MS_FLIGHT_USERS set
+		last_time=#{last_time},login_count=#{login_count}
+		where
+		username=#{username}
+	</update>
+
+	<delete id="deleteUser" parameterType="String">
+		delete from
+		TB_MS_FLIGHT_USERS
+		where
+		username=#{userName}
+	</delete>
+
+	<select id="queryUserByUsername" parameterType="String"
+		resultMap="userMap">
+		select * from TB_MS_FLIGHT_USERS where username like
+		CONCAT(CONCAT('%',#{userName}), '%')
+	</select>
+
+	<update id="updateEntity" parameterType="com.qu.User">
+		UPDATE
+			TB_MS_FLIGHT_USERS
+			<set>
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="department != null">
+					department=#{department},
+				</if>
+				<if test="telphone != null">
+					telphone=#{telphone},
+				</if>
+				<if test="email != null">
+					email=#{email},
+				</if>
+				<if test="img != null">
+					img = #{img},
+				</if>
+				<if test="login_count != null">
+					login_count=#{login_count},
+				</if>
+				<if test="note != null">
+					note = #{note},
+				</if>
+				<if test="gender != null">
+					gender = #{gender}
+				</if>
+			</set>
+			where username=#{username}
+	</update>
+
+	<update id="updateUser" parameterType="com.qu.User">
+		UPDATE
+		TB_MS_FLIGHT_USERS
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="department != null">
+				department=#{department},
+			</if>
+			<if test="telphone != null">
+				telphone=#{telphone},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="img != null">
+				img = #{img},
+			</if>
+			<if test="login_count != null">
+				login_count=#{login_count},
+			</if>
+			<if test="note != null">
+				note = #{note},
+			</if>
+			<if test="gender != null">
+				gender = #{gender}
+			</if>
+		</set>
+		where username=#{username}
+	</update>
+
+	<update id="updateUserPwd" parameterType="Map">
+		UPDATE
+		TB_MS_FLIGHT_USERS
+		<set>
+			password=#{new_password}
+		</set>
+		where username=#{username} and password=#{old_password}
+	</update>
+	
+	
+	 <delete id="deleteEntity" parameterType="com.qu.User">
+     	 delete from TB_MS_FLIGHT_USERS where username = #{username,jdbcType=VARCHAR}
+  	</delete>
+</mapper> 

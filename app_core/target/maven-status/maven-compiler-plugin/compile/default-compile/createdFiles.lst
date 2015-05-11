@@ -1,2 +1,6 @@
-com\qu\User.class
-org\app_core\App.class
+com\qu\Dao\TestUserDao.class
+com\qu\Dao\impl\TestUserDaoImpl.class
+com\qu\model\TestUser.class
+com\qu\service\TestService.class
+com\qu\Dao\UserDao.class
+com\qu\model\User.class

@@ -3,12 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.qu.User" alias="User" />
+		<typeAlias type="com.qu.model.User" alias="User" />
+		<typeAlias type="com.qu.model.TestUser" alias="TestUser" />
 	</typeAliases>
 
 	<mappers>
-		
 		<mapper resource="mybatis/UserDao.xml" />
-		
+		<mapper resource="mybatis/TestUserDao.xml" />
 	</mappers>
 </configuration>

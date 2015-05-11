@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="User">
 
-	<resultMap type="com.qu.User" id="userMap">
+	<resultMap type="com.qu.model.User" id="userMap">
 		<id property="username" column="username"></id>
 		<id property="password" column="password"></id>
 		<id property="email" column="email"></id>
@@ -16,7 +16,7 @@
 		<id property="gender" column="note" />
 	</resultMap>
 
-	<select id="isUserExist" parameterType="com.qu.User"
+	<select id="isUserExist" parameterType="com.qu.model.User"
 		resultType="int">
 		select count(*) from TB_MS_FLIGHT_USERS
 		where
@@ -72,7 +72,7 @@
   </select>
     
     
-    <insert id="insertEntity" parameterType="com.qu.User">
+    <insert id="insertEntity" parameterType="com.qu.model.User">
     	INSERT INTO
 		TB_MS_FLIGHT_USERS
 	    (USERNAME, PASSWORD, LAST_TIME, LOGIN_COUNT,EMAIL,PWD_KEEP_TIME, NAME,DEPARTMENT,LAST_CHGPWD_TIME,TELPHONE)
@@ -90,7 +90,7 @@
 			#{telphone}
 		)
     </insert>
-	<insert id="insertUser" parameterType="com.qu.User">
+	<insert id="insertUser" parameterType="com.qu.model.User">
 		INSERT INTO
 		TB_MS_FLIGHT_USERS
 	    (USERNAME, PASSWORD, LAST_TIME, LOGIN_COUNT,EMAIL,PWD_KEEP_TIME, NAME,DEPARTMENT,LAST_CHGPWD_TIME)
@@ -108,7 +108,7 @@
 		)
 	</insert>
 
-	<update id="updateUserLoginInfo" parameterType="com.qu.User">
+	<update id="updateUserLoginInfo" parameterType="com.qu.model.User">
 		update
 		TB_MS_FLIGHT_USERS set
 		last_time=#{last_time},login_count=#{login_count}
@@ -129,7 +129,7 @@
 		CONCAT(CONCAT('%',#{userName}), '%')
 	</select>
 
-	<update id="updateEntity" parameterType="com.qu.User">
+	<update id="updateEntity" parameterType="com.qu.model.User">
 		UPDATE
 			TB_MS_FLIGHT_USERS
 			<set>
@@ -161,7 +161,7 @@
 			where username=#{username}
 	</update>
 
-	<update id="updateUser" parameterType="com.qu.User">
+	<update id="updateUser" parameterType="com.qu.model.User">
 		UPDATE
 		TB_MS_FLIGHT_USERS
 		<set>
@@ -203,7 +203,7 @@
 	</update>
 	
 	
-	 <delete id="deleteEntity" parameterType="com.qu.User">
+	 <delete id="deleteEntity" parameterType="com.qu.model.User">
      	 delete from TB_MS_FLIGHT_USERS where username = #{username,jdbcType=VARCHAR}
   	</delete>
 </mapper> 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TestUser">
+
+	<resultMap type="com.qu.model.TestUser" id="userMap">
+		<id property="id" column="ID"></id>
+		<id property="name" column="NAME"></id>
+	</resultMap>
+
+	<select id="getUserByName" parameterType="String"
+		resultMap="userMap">
+		select * from TESTUSER 
+	</select>
+
+	
+</mapper> 

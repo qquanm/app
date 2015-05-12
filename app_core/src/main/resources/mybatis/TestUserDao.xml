@@ -11,6 +11,16 @@
 		resultMap="userMap">
 		select * from TESTUSER 
 	</select>
-
+    
+    <insert id="insertTestUser" parameterType="com.qu.model.User">
+        INSERT INTO
+        TESTUSER
+        (ID,NAME)
+        VALUES
+        (
+            #{id}, 
+            #{name}
+        )
+    </insert>
 	
 </mapper> 

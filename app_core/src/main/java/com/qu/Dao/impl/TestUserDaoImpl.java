@@ -16,4 +16,10 @@ public class TestUserDaoImpl extends SqlSessionDaoSupport implements TestUserDao
                 username);
     }
 
+    @Override
+    public int insert(TestUser user) {
+        int ret = getSqlSession().insert("TestUser.insertTestUser",user);
+        return ret;
+    }
+
 }

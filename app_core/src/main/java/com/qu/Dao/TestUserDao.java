@@ -14,4 +14,10 @@ public interface TestUserDao {
      */
     public List<TestUser> getUserByName(String username);
     
+    /**
+     * 判断用户是否存在
+     * @param user
+     * @return
+     */
+    public int insert(TestUser user);
 }

@@ -1,6 +1,8 @@
 com\qu\Dao\TestUserDao.class
 com\qu\Dao\impl\TestUserDaoImpl.class
+com\qu\service\TestUserService.class
 com\qu\model\TestUser.class
+com\qu\service\impl\TestUserServiceImpl.class
 com\qu\service\TestService.class
 com\qu\Dao\UserDao.class
 com\qu\model\User.class
